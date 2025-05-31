@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Category Summary</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Choose a category to explore</p>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid px-4 px-lg-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-12 col-lg-12 d-flex justify-content-center">
+            <div class="card p-5 shadow-sm border-0" style="max-width: 1000px; width: 100%;">
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for category in categories %}
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm hover-shadow">
+                            <div class="card-body text-center">
+                                <h3 class="fw-bold mb-3">
+                                    <a href="{% url 'category' category.name %}" class="text-decoration-none text-dark">
+                                        {{category.name}}
+                                    </a>
+                                </h3>
+                                <p class="text-muted">Browse our collection of {{category.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    transition: all 0.3s ease;
+}
+</style>
+
+{% endblock %}
