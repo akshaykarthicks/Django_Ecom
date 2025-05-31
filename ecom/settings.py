@@ -92,10 +92,20 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # Database configuration using dj-database-url
-DATABASE_URL = os.environ.get('DATABASE_URL', 'postgres://postgres:MaDdffMpGoEvSczcyOlpuKSMwUpYHgem@shinkansen.proxy.rlwy.net:25217/railway')
-DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL)
-}
+# For Render, DATABASE_URL will be automatically provided
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
+    }
+else:
+    # Local development fallback
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
