@@ -29,8 +29,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS = []
+ALLOWED_HOSTS = ['djangoecom-production-3f79.up.railway.app','https://djangoecom-production-3f79.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['djangoecom-production-3f79.up.railway.app','https://djangoecom-production-3f79.up.railway.app']
 
 
 # Application definition
