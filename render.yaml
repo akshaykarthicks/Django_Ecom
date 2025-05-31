@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: django-ecommerce
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn ecom.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: django_ecom_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: 3.10.11
+
+databases:
+  - name: django_ecom_db
+    databaseName: django_ecom
+    user: django_ecom_user

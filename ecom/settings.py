@@ -29,8 +29,16 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['djangoecom-production-3f79.up.railway.app', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://djangoecom-production-3f79.up.railway.app', 'http://djangoecom-production-3f79.up.railway.app']
+# Allow all hosts for Render, or specify your Render domain when you know it
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1']
+
+# Update this with your Render URL when you have it
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    CSRF_TRUSTED_ORIGINS = [f'https://{RENDER_EXTERNAL_HOSTNAME}']
+else:
+    CSRF_TRUSTED_ORIGINS = []
 
 
 # Application definition
@@ -84,7 +92,7 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # Database configuration using dj-database-url
-DATABASE_URL = 'postgres://postgres:MaDdffMpGoEvSczcyOlpuKSMwUpYHgem@shinkansen.proxy.rlwy.net:25217/railway'
+DATABASE_URL = os.environ.get('DATABASE_URL', 'postgres://postgres:MaDdffMpGoEvSczcyOlpuKSMwUpYHgem@shinkansen.proxy.rlwy.net:25217/railway')
 DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL)
 }
@@ -125,12 +133,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = ['static/']
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
