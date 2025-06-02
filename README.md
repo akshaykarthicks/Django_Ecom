@@ -1,8 +1,9 @@
 # E-Commerce Website
 
 A full-featured e-commerce website built with Django, featuring a modern and responsive design.
-![Screenshot 2025-05-31 152242](https://github.com/user-attachments/assets/487668f4-e4a9-4e9a-823d-33031aa103a0)
-![Screenshot 2025-05-31 152838](https://github.com/user-attachments/assets/dc708dc4-a136-4497-934a-62e3f032b092)
+
+![Screenshot 2025-05-31 201544](https://github.com/user-attachments/assets/b0dbcda3-15ef-462e-ab23-5e3949245994)
+![Screenshot 2025-05-31 201639](https://github.com/user-attachments/assets/bc6d3b64-fab3-4e75-a42a-dbbdc32d7d5f)
 
 ![Screenshot 2025-05-30 142641](https://github.com/user-attachments/assets/284f8b3c-7fe8-4185-8114-be76d7561dbd)
 ![Screenshot 2025-05-31 082510](https://github.com/user-attachments/assets/9cfb9f7c-3ed6-415f-bb85-bf7f22714363)
