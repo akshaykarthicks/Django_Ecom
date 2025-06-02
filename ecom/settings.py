@@ -12,23 +12,23 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
-DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=626$*+4h516f)v+d!+^*9=qoh6m0jsdk3+scr2(3v)c6yv!3w'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'a-default-fallback-secret-key-if-not-set')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [djangoecom-production-3f79.up.railway.app,https://djangoecom-production-3f79.up.railway.app]
-CSRF_TRUSTED_ORIGINS=[djangoecom-production-3f79.up.railway.app,https://djangoecom-production-3f79.up.railway.app]
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',') if host]
 
 # Application definition
 
@@ -79,17 +79,11 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD':os.environ['DB_PASSWORD_YO'],
-        'HOST': 'postgresql://postgres:MaDdffMpGoEvSczcyOlpuKSMwUpYHgem@shinkansen.proxy.rlwy.net:25217/railway',
-        'PORT': '5432',
-        
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=os.getenv('DJANGO_DB_SSL_REQUIRE', 'True') == 'True' # Default to True for Railway
+    )
 }
 
 
