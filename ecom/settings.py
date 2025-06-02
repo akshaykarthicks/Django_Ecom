@@ -17,18 +17,18 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 # load_dotenv()
 DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=626$*+4h516f)v+d!+^*9=qoh6m0jsdk3+scr2(3v)c6yv!3w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['djangoecom-production-3f79.up.railway.app','https://djangoecom-production-3f79.up.railway.app']
-CSRF_TRUSTED_ORIGINS=['https://djangoecom-production-3f79.up.railway.app']
+DEBUG = False
+ 
+ALLOWED_HOSTS = ['djangoecom-production-3f79.up.railway.app','https://djangoecom-production-3f79.up.railway.app', 'web-production-02714.up.railway.app', 'https://web-production-02714.up.railway.app']
+CSRF_TRUSTED_ORIGINS=['https://djangoecom-production-3f79.up.railway.app', 'https://web-production-02714.up.railway.app']
 
 # Application definition
 
