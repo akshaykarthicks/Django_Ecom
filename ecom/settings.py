@@ -12,23 +12,35 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-# from dotenv import load_dotenv
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-# load_dotenv()
+# Uncomment these lines for environment variables
+from dotenv import load_dotenv
+load_dotenv()
 DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
-SECRET_KEY = os.environ['SECRET_KEY']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-=626$*+4h516f)v+d!+^*9=qoh6m0jsdk3+scr2(3v)c6yv!3w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
- 
-ALLOWED_HOSTS = ['djangoecom-production-3f79.up.railway.app','https://djangoecom-production-3f79.up.railway.app', 'web-production-02714.up.railway.app', 'https://web-production-02714.up.railway.app']
-CSRF_TRUSTED_ORIGINS=['https://djangoecom-production-3f79.up.railway.app', 'https://web-production-02714.up.railway.app']
+
+# Update ALLOWED_HOSTS for the new domain
+ALLOWED_HOSTS = [
+    'web-production-02714.up.railway.app',
+    'https://web-production-02714.up.railway.app',
+    'http://web-production-02714.up.railway.app'
+]
+
+# Update CSRF_TRUSTED_ORIGINS for the new domain
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-02714.up.railway.app',
+    'http://web-production-02714.up.railway.app'
+]
+
+# Move SECRET_KEY to environment variable
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-=626$*+4h516f)v+d!+^*9=qoh6m0jsdk3+scr2(3v)c6yv!3w')
 
 # Application definition
 
@@ -78,19 +90,34 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+# Database configuration
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD':os.environ['DB_PASSWORD_YO'],
-        'HOST': 'postgres.railway.internal'
+        'PASSWORD': 'MaDdffMpGoEvSczcyOlpuKSMwUpYHgem',
+        'HOST': 'postgres.railway.internal',
         'PORT': '5432',
-        
     }
 }
+
+ady add# Set DEBUG to False for production
+DEBUG = False
+
+# Update ALLOWED_HOSTS
+ALLOWED_HOSTS = [
+    'djangoecom-production-3f79.up.railway.app',
+    'https://djangoecom-production-3f79.up.railway.app',
+    'http://djangoecom-production-3f79.up.railway.app',
+    '*',  # Add this temporarily for testing
+]
+
+# Update CSRF_TRUSTED_ORIGINS
+CSRF_TRUSTED_ORIGINS = [
+    'https://djangoecom-production-3f79.up.railway.app',
+    'http://djangoecom-production-3f79.up.railway.app',
+]
 
 
 # Password validation
@@ -127,14 +154,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = ['static/']
-
-# White noise static stuff
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Improve static files configuration
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+# Media files configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
