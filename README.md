@@ -6,6 +6,7 @@ A full-featured e-commerce website built with Django, featuring a modern and res
 ![Screenshot 2025-05-31 201639](https://github.com/user-attachments/assets/bc6d3b64-fab3-4e75-a42a-dbbdc32d7d5f)
 ![Screenshot 2025-05-31 201736](https://github.com/user-attachments/assets/27c8ba12-29b9-4a43-a0a8-4767b7983d44)
 ![Screenshot 2025-05-30 142641](https://github.com/user-attachments/assets/284f8b3c-7fe8-4185-8114-be76d7561dbd)
+![Screenshot 2025-05-31 201706](https://github.com/user-attachments/assets/4e533da0-a22a-47b5-ae80-3ea8dc555bcb)
 
 
 
